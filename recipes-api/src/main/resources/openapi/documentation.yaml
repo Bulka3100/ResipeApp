@@ -1,0 +1,145 @@
+openapi: 3.0.3
+info:
+  title: Рецепты API
+  version: 1.0.0
+  description: API для доступа к базе данных рецептов. Позволяет получать информацию о рецептах и категориях. Не требует авторизации для доступа к данным.
+
+servers:
+  - url: http://localhost:8000/api
+    description: Основной сервер API рецептов
+
+paths:
+  /recipe/{id}:
+    get:
+      summary: Получение рецепта по ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Идентификатор рецепта
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Recipe'
+        '404':
+          description: Рецепт не найден
+
+  /recipes:
+    get:
+      summary: Получение списка рецептов по списку ID
+      parameters:
+        - name: ids
+          in: query
+          required: true
+          description: Список ID рецептов, разделённых запятой
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Recipe'
+
+  /category/{id}:
+    get:
+      summary: Получение категории по ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Идентификатор категории
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+        '404':
+          description: Категория не найдена
+
+  /category/{id}/recipes:
+    get:
+      summary: Получение списка рецептов в категории по ID категории
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Идентификатор категории
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Recipe'
+
+  /category:
+    get:
+      summary: Получение списка всех категорий
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Category'
+
+components:
+  schemas:
+    Recipe:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        ingredients:
+          type: array
+          items:
+            $ref: '#/components/schemas/Ingredient'
+        method:
+          type: array
+          items:
+            type: string
+        imageUrl:
+          type: string
+
+    Category:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        description:
+          type: string
+        imageUrl:
+          type: string
+
+    Ingredient:
+      type: object
+      properties:
+        quantity:
+          type: string
+        unitOfMeasure:
+          type: string
+        description:
+          type: string

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:backgroundTint="@color/background_color"
     android:orientation="vertical"
-    tools:context=".ui.recipes.recipeList.RecipeListFragment">
+    tools:context="org.edc.sic.kirill.recipeAndroidApp.ui.recipes.recipeList.RecipeListFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

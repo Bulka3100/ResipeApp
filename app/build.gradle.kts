@@ -9,11 +9,11 @@ plugins {
 }
 
 android {
-    namespace = "com.animus.androidsprint"
+    namespace = "org.edc.sic.kirill.recipeAndroidApp"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.animus.androidsprint"
+        applicationId = "org.edc.sic.kirill.recipeAndroidApp"
         minSdk = 28
         targetSdk = 34
         versionCode = 1
